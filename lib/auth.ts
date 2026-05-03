@@ -39,12 +39,11 @@ export function setAuthCookie(response: NextResponse, token: string) {
     value: token,
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: true,   // 🔥 force true
     path: "/",
     maxAge: 60 * 60 * 24 * 7
   });
 }
-
 export function clearAuthCookie(response: NextResponse) {
   response.cookies.set({
     name: AUTH_COOKIE_NAME,

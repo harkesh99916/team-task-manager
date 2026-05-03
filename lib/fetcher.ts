@@ -18,10 +18,11 @@ export async function apiRequest<T = unknown>(
     headers.set("Content-Type", "application/json");
   }
 
-  const response = await fetch(input, {
-    ...init,
-    headers
-  });
+const response = await fetch(input, {
+  ...init,
+  headers,
+  credentials: "include" // 🔥 THIS IS THE FIX
+});
 
   const text = await response.text();
   let payload: ApiEnvelope<T> | null = null;
